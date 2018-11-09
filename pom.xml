@@ -6,7 +6,7 @@
 
     <groupId>amr-gen</groupId>
     <artifactId>amr-gen</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <distributionManagement>
@@ -27,28 +27,6 @@
             <id>jitpack.io</id>
             <name>jitpack</name>
             <url>https://jitpack.io</url>
-        </repository>
-        <repository>
-            <id>taln-repo-internal</id>
-            <name>TALN internal repo</name>
-            <url>https://maven-taln.graph.upf.edu/repository/internal/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>taln-repo-snapshots</id>
-            <name>TALN internal repo</name>
-            <url>https://maven-taln.graph.upf.edu/repository/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
         </repository>
     </repositories>
 

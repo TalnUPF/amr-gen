@@ -41,6 +41,8 @@ public class AmrMain {
 
     private boolean setUp = false;
 
+    public MaxentTagger getPosTagger() { return posTagger;}
+
     public static void main(String[] args) throws IOException, JWNLException {
 
         args = new String[]{"-i", "in1.txt", "-o", "out1.txt"};
@@ -250,7 +252,7 @@ public class AmrMain {
     /**
      * Sets up the generator for testing by loading the language model, the POS tagger, and all relevant maximum entropy models.
      */
-    private void setUp() throws IOException, JWNLException {
+    public void setUp() throws IOException, JWNLException {
         setUp(new ArrayList<>(), false);
     }
 
