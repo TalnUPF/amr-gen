@@ -4,9 +4,53 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>1</groupId>
-    <artifactId>AMR</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>amr-gen</groupId>
+    <artifactId>amr-gen</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+
+    <distributionManagement>
+        <repository>
+            <id>maven-releases</id>
+            <name>Internal Release Repository</name>
+            <url>http://maven-taln.upf.edu/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>maven-snapshots</id>
+            <name>Internal Snapshot Repository</name>
+            <url>http://maven-taln.upf.edu/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <name>jitpack</name>
+            <url>https://jitpack.io</url>
+        </repository>
+        <repository>
+            <id>taln-repo-internal</id>
+            <name>TALN internal repo</name>
+            <url>https://maven-taln.graph.upf.edu/repository/internal/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>taln-repo-snapshots</id>
+            <name>TALN internal repo</name>
+            <url>https://maven-taln.graph.upf.edu/repository/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -84,6 +128,7 @@
             <artifactId>extjwnl</artifactId>
             <version>1.9.2</version>
         </dependency>
+
         <dependency>
             <groupId>net.sf.extjwnl</groupId>
             <artifactId>extjwnl-data-wn31</artifactId>
@@ -103,7 +148,41 @@
             <version>0.0.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.collections</groupId>
+            <artifactId>google-collections</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.esotericsoftware</groupId>
+            <artifactId>kryo</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>it.unimi.dsi</groupId>
+            <artifactId>fastutil</artifactId>
+            <version>8.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sleepycat</groupId>
+            <artifactId>je</artifactId>
+            <version>5.0.73</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.jaytaylor</groupId>
+            <artifactId>jaws</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+        </dependency>
     </dependencies>
-
-
 </project>

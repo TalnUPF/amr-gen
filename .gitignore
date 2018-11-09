@@ -1,0 +1,97 @@
+# Created by .ignore support plugin (hsz.mobi)
+### JetBrains template
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff:
+#.idea/**/workspace.xml
+#.idea/**/tasks.xml
+#.idea/dictionaries
+/.idea/
+/artifacts/
+
+# Sensitive or high-churn files:
+#.idea/**/dataSources/
+#.idea/**/dataSources.ids
+#.idea/**/dataSources.local.xml
+#.idea/**/sqlDataSources.xml
+#.idea/**/dynamic.xml
+#.idea/**/uiDesigner.xml
+
+# Gradle:
+#.idea/**/gradle.xml
+#.idea/**/libraries
+
+# CMake
+cmake-build-debug/
+cmake-build-release/
+
+# Mongo Explorer plugin:
+#.idea/**/mongoSettings.xml
+
+## File-based project format:
+*.iws
+*.iml
+
+## Plugin-specific files:
+
+# IntelliJ
+out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Cursive Clojure plugin
+.idea/replstate.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+
+# Eclipse files and folders
+.project
+.classpath
+/.settings/
+/target/
+/commons/target/
+amr/src/main/resources/
+amr/src/test/java/
+amr/src/test/resources/0b9c7f0fe93376f9ff3f280fc74e063ce9d07e3c.story.all.basic-abt-brown-verb.parsed.amr.tok.aligned
+amr/src/test/resources/0cd753e89bd0864d0cfb3fa61b0928a3bae86785.story.all.basic-abt-brown-verb.parsed.amr.tok_graphs.bin
+amr/src/test/resources/1c00665365d7251f2c7fb31cd74df77fae1b30ef.story.all.basic-abt-brown-verb.parsed.amr.tok.aligned
+amr/src/test/resources/cnn_ffff522cebe5ad9dcfb6dfc476b8f423f3f8dd34.story.all.basic-abt-brown-verb.parsed.amr.tok_graphs.bin
+core/src/test/
+models/arg_insertion.model
+models/arg_insertion.model.meta
+models/child_ins.bin.gz
+models/child_ins.bin.gz.meta
+models/denom.model
+models/denom.model.meta
+models/first_stage.model
+models/first_stage.model.meta
+models/number.model
+models/number.model.meta
+models/others_insertion.model
+models/others_insertion.model.meta
+models/pos.model
+models/pos.model.meta
+models/realize.bin.gz
+models/realize.bin.gz.meta
+models/reorder.model
+models/reorder.model.meta
+models/reorder_left.model
+models/reorder_left.model.meta
+models/reorder_right.model
+models/reorder_right.model.meta
+models/tense.model
+models/tense.model.meta
+models/voice.model
+models/voice.model.meta
+res/lm.binary
+
