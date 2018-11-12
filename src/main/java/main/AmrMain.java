@@ -19,6 +19,7 @@ import net.sf.extjwnl.JWNLException;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -47,7 +48,7 @@ public class AmrMain {
 
         args = new String[]{"-i", "in1.txt", "-o", "out1.txt"};
 
-        Amr.setUp();
+        Amr.setUp(Paths.get(""));
         AmrMain main = new AmrMain(args);
 
         System.in.read();
@@ -131,6 +132,16 @@ public class AmrMain {
         new AmrFrame(amrs.get(0));
         new DependencyTreeFrame(amrs.get(0).dependencyTree);
     }*/
+
+    public AmrMain(Path resources) throws IOException, JWNLException
+    {
+	    //Configurator.configure();
+	    Debugger.PRINT_DEBUG_INFORMATION = false;
+	    Amr.setUp(resources);
+	    maxentModels = new MaxentModelWrapper();
+	    setUp();
+
+    }
 
     private AmrMain(String[] args) throws IOException, JWNLException {
 
@@ -252,7 +263,7 @@ public class AmrMain {
     /**
      * Sets up the generator for testing by loading the language model, the POS tagger, and all relevant maximum entropy models.
      */
-    public void setUp() throws IOException, JWNLException {
+    private void setUp() throws IOException, JWNLException {
         setUp(new ArrayList<>(), false);
     }
 
@@ -356,6 +367,20 @@ public class AmrMain {
         setUp = true;
         Hyperparam.initializeFromFile(PathList.HYPERPARAMS_LIST);
         applyCurrentHyperparams();
+    }
+
+
+    public String generate(String amr_bank)
+    {
+	    final List<Amr> amrs = Arrays.stream(amr_bank.split("\n\n"))
+			    .map(a -> Arrays.stream(a.split("\n"))
+			            .filter(l -> !l.startsWith("#"))
+			            .collect(Collectors.joining("\n")))
+			    .map(AmrParser::fromString)
+			    .collect(Collectors.toList());
+
+	    Amr.prepare(amrs, this.posTagger, true); // Needed when calling AmrParser::fromString instead of AmrMain::loadGraphs
+	    return String.join("\n", generate(amrs, true, true));
     }
 
     /**

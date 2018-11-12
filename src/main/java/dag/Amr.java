@@ -13,6 +13,7 @@ import gen.PartialTransitionFunction;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -59,11 +60,13 @@ public class Amr {
      * This method must be called before calling any of {@link Amr#prepare(List, MaxentTagger, boolean)},
      * {@link Amr#prepareForTraining(MaxentTagger)}, {@link Amr#prepareForTesting(MaxentTagger)}.
      */
-    public static void setUp() throws IOException {
+    public static void setUp(Path resources) throws IOException {
         if(SET_UP)  {
             Debugger.printlnErr("setUp() has already been called.");
             return;
         }
+
+	    PathList.initializePaths(resources);
         deverbalizationMap = new HashMap<>();
         deverbalizationConcepts = new HashSet<>();
         List<String> lines = Files.readAllLines(Paths.get(PathList.VERBALIZATION_PATH));
