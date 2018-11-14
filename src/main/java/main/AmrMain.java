@@ -18,6 +18,8 @@ import ml.*;
 import net.sf.extjwnl.JWNLException;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -135,13 +137,40 @@ public class AmrMain {
 
     public AmrMain(Path resources) throws IOException, JWNLException
     {
+	    PrintStream out = System.out;
+	    PrintStream err= System.err;
+	    System.setOut(new PrintStream(new OutputStream() { public void write(int b) {} }));
+	    System.setErr(new PrintStream(new OutputStream() { public void write(int b) {} }));
+
 	    //Configurator.configure();
 	    Debugger.PRINT_DEBUG_INFORMATION = false;
 	    Amr.setUp(resources);
 	    maxentModels = new MaxentModelWrapper();
 	    setUp();
 
+	    System.setErr(err);
+	    System.setOut(out);
     }
+
+
+	public String generate(String amr_bank)
+	{
+		PrintStream out = System.out;
+		System.setOut(new PrintStream(new OutputStream() { public void write(int b) {} }));
+
+		final List<Amr> amrs = Arrays.stream(amr_bank.split("\n\n"))
+				.map(a -> Arrays.stream(a.split("\n"))
+						.filter(l -> !l.startsWith("#"))
+						.collect(Collectors.joining("\n")))
+				.map(AmrParser::fromString)
+				.collect(Collectors.toList());
+
+		Amr.prepare(amrs, this.posTagger, true); // Needed when calling AmrParser::fromString instead of AmrMain::loadGraphs
+		final String text = String.join("\n", generate(amrs, true, true));
+
+		System.setOut(out);
+		return text;
+	}
 
     private AmrMain(String[] args) throws IOException, JWNLException {
 
@@ -369,26 +398,12 @@ public class AmrMain {
         applyCurrentHyperparams();
     }
 
-
-    public String generate(String amr_bank)
-    {
-	    final List<Amr> amrs = Arrays.stream(amr_bank.split("\n\n"))
-			    .map(a -> Arrays.stream(a.split("\n"))
-			            .filter(l -> !l.startsWith("#"))
-			            .collect(Collectors.joining("\n")))
-			    .map(AmrParser::fromString)
-			    .collect(Collectors.toList());
-
-	    Amr.prepare(amrs, this.posTagger, true); // Needed when calling AmrParser::fromString instead of AmrMain::loadGraphs
-	    return String.join("\n", generate(amrs, true, true));
-    }
-
     /**
      * Generates realizations from AMR graphs using the Generation algorithm as described in the thesis.
      * @param amrs the AMR graphs for which realizations should be generated
      * @return the list of generated realizations
      */
-    public List<String> generate(List<Amr> amrs) {
+    private List<String> generate(List<Amr> amrs) {
         return generate(amrs, true, true);
     }
 
@@ -401,7 +416,7 @@ public class AmrMain {
      * @param postProcess whether post-processing should be performed
      * @return the list of generated realizations
      */
-    public List<String> generate(List<Amr> amrs, boolean firstStage, boolean postProcess) {
+    private List<String> generate(List<Amr> amrs, boolean firstStage, boolean postProcess) {
 
         if(!setUp) {
             throw new AssertionError("setUp() must be called before using the generator.");
