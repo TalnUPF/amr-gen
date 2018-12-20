@@ -50,7 +50,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.0.0</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -75,6 +75,27 @@
                     </execution>
                 </executions>
             </plugin>
+            
+            <plugin>
+		        <groupId>external.atlassian.jgitflow</groupId>
+		        <artifactId>jgitflow-maven-plugin</artifactId>
+		        <version>1.0-m5.1</version>
+		        <configuration>
+		            <flowInitContext>
+		                <masterBranchName>master</masterBranchName>
+		                <developBranchName>development</developBranchName>
+		                <featureBranchPrefix>feature-</featureBranchPrefix>
+		                <releaseBranchPrefix>release-</releaseBranchPrefix>
+		                <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
+		                <versionTagPrefix>version-</versionTagPrefix>
+		            </flowInitContext>
+<!-- 		            <username>USERNAME_FOR_A_GIT_USER</username> -->
+<!-- 		            <password>PASSWORD_FOR_A_GIT_USER</password> -->
+		            <noDeploy>true</noDeploy>
+		            <squash>false</squash>
+		            <scmCommentPrefix>[RELEASE] </scmCommentPrefix>
+		    	</configuration>
+			</plugin>
         </plugins>
     </build>
 
